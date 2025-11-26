@@ -1,73 +1,180 @@
-# Welcome to your Lovable project
+# Kent's Garden LLC Website
 
-## Project info
+A modern, mobile-responsive website for Kent's Garden LLC - a boutique landscaping company serving the Portland metro area.
 
-**URL**: https://lovable.dev/projects/0d3f3fad-baa4-4439-90ed-e7955d9e8958
+## Features
 
-## How can I edit this code?
+- **Modern, Clean Design**: Sleek interface with earth tones and professional typography
+- **Fully Responsive**: Optimized for mobile, tablet, and desktop viewing
+- **Easy Content Management**: All content stored in structured JSON for easy updates
+- **SEO Optimized**: Semantic HTML, meta tags, and proper heading structure
+- **Multiple Pages**: Home, Services, Portfolio, About, Blog, Gallery, Careers, Contact
+- **Professional Navigation**: Sticky header with dropdown menus and mobile-friendly design
 
-There are several ways of editing your application.
+## Getting Started
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/0d3f3fad-baa4-4439-90ed-e7955d9e8958) and start prompting.
+- Node.js (v16 or higher)
+- npm or yarn
 
-Changes made via Lovable will be committed automatically to this repo.
+### Installation
 
-**Use your preferred IDE**
+1. Clone the repository:
+```bash
+git clone <your-repo-url>
+cd kents-garden
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. Install dependencies:
+```bash
+npm install
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Building for Production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+The built files will be in the `dist` directory.
 
-## What technologies are used for this project?
+## Content Management
 
-This project is built with:
+All website content is managed through the `src/data/siteContent.ts` file. This makes it easy for non-technical admins to update content without touching the code.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### How to Update Content
 
-## How can I deploy this project?
+1. Open `src/data/siteContent.ts`
+2. Find the section you want to update (company info, services, testimonials, etc.)
+3. Edit the text between quotes
+4. Save the file - changes will appear immediately in development mode
 
-Simply open [Lovable](https://lovable.dev/projects/0d3f3fad-baa4-4439-90ed-e7955d9e8958) and click on Share -> Publish.
+### Content Structure
 
-## Can I connect a custom domain to my Lovable project?
+The file is organized into sections:
+- **Company Information**: Name, tagline, contact details
+- **Home Page**: Hero section, features, testimonials
+- **Services**: Full list of services with descriptions
+- **Portfolio**: Project categories
+- **About**: Company story, mission, values
+- **Service Areas**: Cities and regions served
 
-Yes, you can!
+### Adding Images
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Images are stored in `src/assets/` and imported in the pages. To add new images:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+1. Place your image in `src/assets/`
+2. Import it in the relevant page component:
+```typescript
+import myImage from "@/assets/my-image.jpg";
+```
+3. Use it in the JSX:
+```jsx
+<img src={myImage} alt="Description" />
+```
+
+### Adding New Services
+
+1. Open `src/data/siteContent.ts`
+2. Add a new service object to the `services` array:
+```typescript
+{
+  id: "my-new-service",
+  title: "My New Service",
+  shortDescription: "Brief description here",
+  fullDescription: "Longer description here",
+  features: [
+    "Feature 1",
+    "Feature 2",
+  ],
+  image: "/images/service-image.jpg",
+}
+```
+
+### Adding Blog Posts
+
+Currently, blog posts are hardcoded in `src/pages/Blog.tsx`. For a production site, you may want to integrate a CMS like:
+- **Contentful** (https://www.contentful.com)
+- **Sanity** (https://www.sanity.io)
+- **Strapi** (https://strapi.io)
+
+## Deployment
+
+### Deploying to Lovable
+
+1. Click the "Publish" button in the top right of the Lovable editor
+2. Follow the prompts to deploy your site
+
+### Deploying to Other Platforms
+
+**Netlify:**
+```bash
+npm run build
+# Drag and drop the 'dist' folder to Netlify
+```
+
+**Vercel:**
+```bash
+npm run build
+vercel --prod
+```
+
+**GitHub Pages:**
+```bash
+npm run build
+# Configure GitHub Pages to serve from the 'dist' directory
+```
+
+## Project Structure
+
+```
+src/
+├── assets/           # Images and static files
+├── components/       # Reusable React components
+│   ├── ui/          # Shadcn UI components
+│   ├── Navigation.tsx
+│   ├── Footer.tsx
+│   └── Layout.tsx
+├── data/            # Content configuration
+│   └── siteContent.ts
+├── pages/           # Page components
+│   ├── Home.tsx
+│   ├── Services.tsx
+│   ├── Portfolio.tsx
+│   ├── About.tsx
+│   ├── Blog.tsx
+│   ├── Gallery.tsx
+│   ├── Careers.tsx
+│   └── Contact.tsx
+├── hooks/           # Custom React hooks
+├── lib/             # Utility functions
+└── index.css        # Global styles and design system
+```
+
+## Design System
+
+The site uses a custom design system defined in `src/index.css` with:
+- **Primary Color**: Deep forest green
+- **Accent Color**: Fresh garden green  
+- **Secondary**: Warm earth tones
+- **Typography**: Inter (sans-serif), Playfair Display (serif headings)
+
+All colors use HSL values and CSS custom properties for easy theming.
+
+## Support
+
+For questions or issues with the website:
+- Email: info@kentsgarden.com
+- Phone: (555) 123-4567
+
+## License
+
+Copyright © 2024 Kent's Garden LLC. All rights reserved.
