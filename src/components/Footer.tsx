@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import { siteConfig } from "@/data/siteContent";
+import logo from "@/assets/logo.svg";
 
 const Footer = () => {
   return (
@@ -9,7 +10,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-serif font-bold mb-4">{siteConfig.company.name}</h3>
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src={logo} 
+                alt={`${siteConfig.company.name} Logo`}
+                className="h-10 w-10 flex-shrink-0"
+              />
+              <h3 className="text-xl font-serif font-bold">{siteConfig.company.name}</h3>
+            </div>
             <p className="text-sm opacity-90 mb-4">{siteConfig.company.tagline}</p>
             <div className="space-y-2 text-sm opacity-90">
               <div className="flex items-center gap-2">

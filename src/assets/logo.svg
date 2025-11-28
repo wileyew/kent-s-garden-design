@@ -1,0 +1,61 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Top-left leaf (dark green #2d5016) - passes OVER top-right -->
+  <path d="M 25 15 Q 10 25, 12 45 Q 18 58, 32 58 Q 48 58, 58 42 Q 56 28, 45 18 Q 35 10, 25 15 Z" 
+        fill="#2d5016" 
+        stroke="#1a3009" 
+        stroke-width="0.4"/>
+  <path d="M 25 15 Q 35 25, 42 35" 
+        stroke="#1a3009" 
+        stroke-width="1" 
+        fill="none" 
+        stroke-linecap="round"/>
+  <!-- Overlap section - top-left over top-right -->
+  <path d="M 52 35 Q 58 42, 62 48 Q 58 44, 54 40 Q 50 36, 48 34 Z" 
+        fill="#2d5016" 
+        opacity="0.98"/>
+  
+  <!-- Top-right leaf (light green #7cb342) - passes OVER bottom-left -->
+  <path d="M 95 15 Q 110 25, 108 45 Q 102 58, 88 58 Q 72 58, 62 42 Q 64 28, 75 18 Q 85 10, 95 15 Z" 
+        fill="#7cb342" 
+        stroke="#558b2f" 
+        stroke-width="0.4"/>
+  <path d="M 95 15 Q 85 25, 78 35" 
+        stroke="#558b2f" 
+        stroke-width="1" 
+        fill="none" 
+        stroke-linecap="round"/>
+  <!-- Overlap section - top-right over bottom-left -->
+  <path d="M 68 50 Q 62 58, 58 65 Q 62 60, 66 55 Q 70 50, 72 48 Z" 
+        fill="#7cb342" 
+        opacity="0.98"/>
+  
+  <!-- Bottom-left leaf (dark green #2d5016) - passes OVER bottom-right -->
+  <path d="M 25 105 Q 10 95, 12 75 Q 18 62, 32 62 Q 48 62, 58 78 Q 56 92, 45 102 Q 35 110, 25 105 Z" 
+        fill="#2d5016" 
+        stroke="#1a3009" 
+        stroke-width="0.4"/>
+  <path d="M 25 105 Q 35 95, 42 85" 
+        stroke="#1a3009" 
+        stroke-width="1" 
+        fill="none" 
+        stroke-linecap="round"/>
+  <!-- Overlap section - bottom-left over bottom-right -->
+  <path d="M 52 85 Q 58 78, 62 72 Q 58 76, 54 80 Q 50 84, 48 86 Z" 
+        fill="#2d5016" 
+        opacity="0.98"/>
+  
+  <!-- Bottom-right leaf (light green #7cb342) - passes OVER top-left -->
+  <path d="M 95 105 Q 110 95, 108 75 Q 102 62, 88 62 Q 72 62, 62 78 Q 64 92, 75 102 Q 85 110, 95 105 Z" 
+        fill="#7cb342" 
+        stroke="#558b2f" 
+        stroke-width="0.4"/>
+  <path d="M 95 105 Q 85 95, 78 85" 
+        stroke="#558b2f" 
+        stroke-width="1" 
+        fill="none" 
+        stroke-linecap="round"/>
+  <!-- Overlap section - bottom-right over top-left -->
+  <path d="M 68 70 Q 62 62, 58 55 Q 62 60, 66 65 Q 70 70, 72 72 Z" 
+        fill="#7cb342" 
+        opacity="0.98"/>
+</svg>
