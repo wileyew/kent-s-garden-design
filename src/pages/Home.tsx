@@ -74,26 +74,23 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Projects */}
+      {/* Featured Products */}
       <section className="py-20">
         <div className="container px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Featured Projects</h2>
-            <p className="text-xl text-muted-foreground">
-              Transforming outdoor spaces into beautiful sanctuaries
-            </p>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Featured Products</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <Link to="/portfolio" className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow">
               <img
                 src={suburbanImage}
-                alt="Suburban backyard transformation"
+                alt="Modern landscaping and hardscaping visions"
                 className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-6">
                 <div className="text-primary-foreground">
-                  <h3 className="text-2xl font-serif font-bold mb-2">Modern Suburban Oasis</h3>
+                  <h3 className="text-2xl font-serif font-bold mb-2">Modern landscaping and hardscaping visions</h3>
                   <p className="opacity-90">Contemporary design meets natural beauty</p>
                 </div>
               </div>
@@ -102,13 +99,13 @@ const Home = () => {
             <Link to="/portfolio" className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow">
               <img
                 src={rooftopImage}
-                alt="Rooftop garden design"
+                alt="Commercial maintenance"
                 className="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-6">
                 <div className="text-primary-foreground">
-                  <h3 className="text-2xl font-serif font-bold mb-2">Urban Rooftop Retreat</h3>
-                  <p className="opacity-90">Maximizing small spaces with style</p>
+                  <h3 className="text-2xl font-serif font-bold mb-2">Commercial maintenance</h3>
+                  <p className="opacity-90">Efficiently maintaining commercial properties to the utmost degree.</p>
                 </div>
               </div>
             </Link>
@@ -130,11 +127,11 @@ const Home = () => {
         <div className="container px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-center mb-16">
-              Why Choose Kent's Garden LLC
+              Why choose Kent's garden
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {siteConfig.about.values.map((value, index) => (
+              {siteConfig.home.whyChooseUs.map((value, index) => (
                 <div key={index} className="flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center">
@@ -156,9 +153,9 @@ const Home = () => {
       <section className="py-20">
         <div className="container px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">What Clients Say</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">What our clients say</h2>
             <p className="text-xl text-muted-foreground">
-              Trusted by homeowners throughout the Portland area
+              Trusted by homeowners throughout the Northern Virginia area
             </p>
           </div>
 
@@ -185,14 +182,14 @@ const Home = () => {
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Ready to Transform Your Garden?
+            Ready to work together
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
             Let's discuss your vision and create a custom plan for your outdoor space.
           </p>
           <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6 h-auto">
             <Link to="/contact">
-              Request Free Consultation
+              Get started today
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

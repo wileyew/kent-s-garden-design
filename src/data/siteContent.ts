@@ -15,10 +15,10 @@ export const siteConfig = {
   // COMPANY INFORMATION
   company: {
     name: "Kent's Garden LLC",
-    tagline: "Thoughtfully Designed Gardens. Meticulously Maintained.",
-    phone: "(555) 123-4567",
-    email: "info@kentsgarden.com",
-    address: "123 Green Street, Portland, OR 97201",
+    tagline: "Competitive rate, high quality work",
+    phone: "(703)-677-2808",
+    email: "Lancecadle4@gmail.com",
+    address: "",
     hours: "Monday - Saturday: 8AM - 6PM",
   },
 
@@ -32,32 +32,32 @@ export const siteConfig = {
   // HOME PAGE CONTENT
   home: {
     hero: {
-      title: "Transform Your Outdoor Space",
-      subtitle: "Thoughtfully Designed Gardens. Meticulously Maintained.",
-      description: "Expert garden design and maintenance services for discerning homeowners in the Portland metro area.",
+      title: "Transform your outdoor living space",
+      subtitle: "Thoughtfully designed Landscaping and Hardscaping in the Northern Virginia area.",
+      description: "Ambitiously constructed and meticulously maintained. Competitive rate, high quality work.",
       ctaText: "Request Free Consultation",
       ctaLink: "/contact",
     },
     
     features: [
       {
-        title: "Expert Design",
+        title: "Expert design",
         description: "Custom garden designs tailored to your space, style, and lifestyle.",
         icon: "Palette",
       },
       {
-        title: "Year-Round Care",
+        title: "Year round care",
         description: "Comprehensive maintenance to keep your garden beautiful every season.",
         icon: "Calendar",
       },
       {
-        title: "Eco-Friendly",
-        description: "Sustainable practices that enhance beauty while protecting the environment.",
+        title: "Integrity and honest work",
+        description: "Professional craftsmanship with honest processes and installation. Licensed and insured.",
         icon: "Leaf",
       },
       {
-        title: "Local & Family-Owned",
-        description: "Proudly serving Portland with personalized service and attention to detail.",
+        title: "Local and family owned",
+        description: "Proudly serving the Northern Virginia area with personalized service and attention to detail.",
         icon: "Heart",
       },
     ],
@@ -80,6 +80,38 @@ export const siteConfig = {
         author: "Emily Rodriguez",
         location: "Beaverton",
         rating: 5,
+      },
+    ],
+
+    whyChooseUs: [
+      {
+        title: "Quality craftsmanship",
+        description: "With over 30+ years of experience between the members of our team. We take pride in every detail of the individual projects process. From design to installation to ongoing care, you will be satisfied.",
+      },
+      {
+        title: "Personal service",
+        description: "Every client receives customized solutions and dedicated attention. If you (the client) aren't happy, then we aren't happy. Communication is one of our founding principles",
+      },
+      {
+        title: "Sustainability",
+        description: "We prioritize native plants, professional services and durable, modern products. We install project's that are built to last the test of time. Schedule an estimate and see for yourself!",
+      },
+      {
+        title: "Community",
+        description: "We're committed to supporting local growers, stone vendors and clients. We prioritize helping our community every single chance we get. We even recommend small local contractors like ourselves for other construction projects that aren't in the landscaping/hardscaping realm.",
+      },
+    ],
+
+    featuredProducts: [
+      {
+        title: "Modern landscaping and hardscaping visions",
+        description: "Contemporary design meets natural beauty",
+        image: "/images/featured-1.jpg",
+      },
+      {
+        title: "Commercial maintenance",
+        description: "Efficiently maintaining commercial properties to the utmost degree.",
+        image: "/images/featured-2.jpg",
       },
     ],
   },
@@ -132,32 +164,32 @@ export const siteConfig = {
       image: "/images/service-seasonal.jpg",
     },
     {
-      id: "irrigation",
-      title: "Irrigation & Watering Solutions",
-      shortDescription: "Smart watering systems that keep your garden healthy while conserving water.",
-      fullDescription: "Proper irrigation is crucial for garden health. We design and install efficient systems that deliver water where it's needed while minimizing waste.",
+      id: "hardscaping",
+      title: "Hardscaping Design and Installation",
+      shortDescription: "Our team can design, walk through and install any hardscaping need or want you may have.",
+      fullDescription: "Our team can design, walk through and install any hardscaping need or want you may have. From smart leveling, consultation, design, to pricing. We design and install aesthetically pleasing and lasting hardscaping projects.",
       features: [
-        "Drip irrigation systems",
-        "Smart controller installation",
-        "Rainwater harvesting",
-        "System maintenance and repairs",
-        "Seasonal adjustments",
-        "Water conservation consultation",
+        "Free professional consultation",
+        "Potential designs using our softwares",
+        "Smart level grading if it's necessary",
+        "Code certified and zoning ordination",
+        "Modern products with potential warranty that will last for years to come",
+        "Patios, walkways, retaining walls, decks, front porches, pergolas, gazebos, etc.",
       ],
-      image: "/images/service-irrigation.jpg",
+      image: "/images/service-hardscaping.jpg",
     },
     {
       id: "lighting",
       title: "Outdoor Lighting",
       shortDescription: "Illuminate your garden's beauty and extend your outdoor living hours.",
-      fullDescription: "Thoughtfully designed lighting transforms your garden into an enchanting evening retreat while improving safety and security.",
+      fullDescription: "Thoughtfully designed lighting transforms you garden into an enchanting evening retreat while improving safety and security. Kent's Garden has a certified, journeyman electrician on staff to carefully and professionally install lighting. Whether it's low voltage with a basic outlet or high voltage with a heavy duty transformer. We can take care of ALL your landscaping lighting.",
       features: [
         "Landscape lighting design",
         "Path and safety lighting",
         "Accent and feature lighting",
-        "LED and solar options",
-        "Automated systems",
-        "Seasonal adjustments",
+        "Low voltage and high voltage options",
+        "Certified journeyman electrician on staff",
+        "Professional installation",
       ],
       image: "/images/service-lighting.jpg",
     },
@@ -189,36 +221,59 @@ export const siteConfig = {
 
   // SERVICE AREAS
   serviceAreas: [
-    "Portland",
-    "Beaverton",
-    "Lake Oswego",
-    "West Linn",
-    "Tigard",
-    "Hillsboro",
-    "Oregon City",
-    "Milwaukie",
+    "Manassas",
+    "Manassas Park",
+    "Bristow",
+    "Haymarket",
+    "Warrenton",
+    "Nokesville",
+    "Woodbridge",
+    "Fairfax",
+    "Centreville",
+    "Arlington",
+    "Alexandria",
+    "Springfield",
+    "Annandale",
+    "Leesburg",
+    "Ashburn",
+    "Reston",
+    "Herndon",
+    "Vienna",
+    "Middleburg",
+    "Purcellville",
+    "The Plains",
+    "Culpeper",
+    "New Baltimore",
   ],
 
   // ABOUT PAGE
   about: {
-    story: "Founded by Kent Thompson in 2010, Kent's Garden LLC began with a simple mission: to create beautiful, sustainable gardens that bring joy to people's daily lives. What started as a one-person operation has grown into a trusted team of garden professionals, but our commitment to personalized service and exceptional quality remains unchanged.",
-    mission: "We believe that every outdoor space has the potential to become a personal sanctuary. Our mission is to transform ordinary yards into extraordinary gardens that enhance property value, support local ecosystems, and provide spaces for relaxation and connection with nature.",
+    story: "Kent's Garden LLC was founded in March of 2022 by Lance Cadle. The company name comes from Lance's little brother Kent who tragically passed away on April 16th, 2020. At the time of his passing, Kent was working as a laborer/crew lead assistant on the same crew as his elder brother Lance. Together, for several years, they were working and learning the landscaping/hardscaping industry from residential to commercial application and services. Kent had an eye for installation, especially with blooming flowering patterns and how they beautifully changed throughout the seasons, all the way to paver and retaining wall designs. He really enjoyed beautifying people's outdoor living spaces. Kent's Garden was started as a family owned LLC to help keep the memory of Kent alive. As of November 2025, Kent's Garden LLC now employees 4 expert landscape project managers and operators with a combined experience of over 30+ years. If you live in the Northern Virginia area and you want top notch landscaping/hardscaping designs/installations at a competitive rate. Look no further, schedule a consultation or reach out to Lancecadle4@gmail.com or call 703-677-2808.",
+    mission: "",
     values: [
       {
-        title: "Quality Craftsmanship",
-        description: "We take pride in every detail, from design to installation to ongoing care.",
+        title: "Integrity",
+        description: "Our word and work is all that we have. We WILL NOT be happy until you (the client) are happy.",
       },
       {
-        title: "Sustainability",
-        description: "We prioritize native plants, water conservation, and eco-friendly practices.",
+        title: "Quality craftsmanship",
+        description: "Every person in our company has at least 7 years of experience in the field. We take pride in every detail, from to design to installation to ongoing care.",
       },
       {
-        title: "Personal Service",
-        description: "Every client receives customized solutions and dedicated attention.",
+        title: "Honesty",
+        description: "Kent's Garden does every single thing the right way. Whether it's following code, pricing projects fairly or pulling permits, you are working with absolute professionals who will help you achieve whatever goal or dream landscaping vision that you may have.",
       },
       {
         title: "Community",
-        description: "We're committed to supporting local growers and giving back to our community.",
+        description: "All of our vendors who supply our material are locally owned small businesses. We have helped many clients going through trying times with a variety of projects at a discounted rate. We strive to make the world a better place, day by day.",
+      },
+      {
+        title: "Sustainability",
+        description: "We install landscapes/hardscapes that are built to last. With new age products, our experienced team knows exactly what to install to sustain beauty for years to come. We also offer warranty for up to a year on plantings unless otherwise specified by the client.",
+      },
+      {
+        title: "Military friendly",
+        description: "Anybody who lives in the Northern Virginia area knows that we are blessed to have many military members as our neighbors. Kent's Garden works with veterans and active military personnel frequently. Depending on the size of the project, a discounted percentage for all military will be applied to the overall cost of the job.",
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import { siteConfig } from "@/data/siteContent";
 
 const Footer = () => {
@@ -12,10 +12,6 @@ const Footer = () => {
             <h3 className="text-xl font-serif font-bold mb-4">{siteConfig.company.name}</h3>
             <p className="text-sm opacity-90 mb-4">{siteConfig.company.tagline}</p>
             <div className="space-y-2 text-sm opacity-90">
-              <div className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
-                <span>{siteConfig.company.address}</span>
-              </div>
               <div className="flex items-center gap-2">
                 <Phone className="h-4 w-4 flex-shrink-0" />
                 <a href={`tel:${siteConfig.company.phone}`} className="hover:underline">
@@ -67,7 +63,7 @@ const Footer = () => {
                 <Link to="/gallery" className="hover:underline">Gallery</Link>
               </li>
               <li>
-                <Link to="/careers" className="hover:underline">Careers</Link>
+                <Link to="/licensing" className="hover:underline">Licensing</Link>
               </li>
               <li>
                 <Link to="/contact" className="hover:underline">Contact</Link>

@@ -163,8 +163,8 @@ const Navigation = () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/careers" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
-                  Careers
+                <Link to="/licensing" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                  Licensing
                 </Link>
               </NavigationMenuItem>
             </NavigationMenuList>
@@ -210,7 +210,7 @@ const Navigation = () => {
             ]} />
             <Link to="/blog" className="block py-2 text-base font-medium">Blog</Link>
             <Link to="/gallery" className="block py-2 text-base font-medium">Gallery</Link>
-            <Link to="/careers" className="block py-2 text-base font-medium">Careers</Link>
+            <Link to="/licensing" className="block py-2 text-base font-medium">Licensing</Link>
             <Button asChild className="w-full bg-primary hover:bg-primary-hover">
               <Link to="/contact">Get a Quote</Link>
             </Button>

@@ -29,12 +29,9 @@ const About = () => {
       <section className="py-20">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-serif font-bold mb-8 text-center">Our Story</h2>
-            <div className="prose prose-lg max-w-none text-center mb-12">
-              <p className="text-xl leading-relaxed">{siteConfig.about.story}</p>
-            </div>
-            <div className="prose prose-lg max-w-none text-center">
-              <p className="text-xl leading-relaxed">{siteConfig.about.mission}</p>
+            <h2 className="text-4xl font-serif font-bold mb-8 text-center">Our story</h2>
+            <div className="prose prose-lg max-w-none">
+              <p className="text-lg leading-relaxed mb-4">{siteConfig.about.story}</p>
             </div>
           </div>
         </div>
@@ -44,7 +41,7 @@ const About = () => {
       <section className="py-20 bg-muted/30">
         <div className="container px-4">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-serif font-bold mb-12 text-center">Our Values</h2>
+            <h2 className="text-4xl font-serif font-bold mb-12 text-center">Our values</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {siteConfig.about.values.map((value, index) => (
                 <Card key={index} className="border-2">
@@ -63,9 +60,9 @@ const About = () => {
       <section id="service-areas" className="py-20">
         <div className="container px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-serif font-bold mb-6">Service Areas</h2>
+            <h2 className="text-4xl font-serif font-bold mb-6">Service areas</h2>
             <p className="text-xl text-muted-foreground mb-12">
-              Proudly serving the Portland metro area and surrounding communities
+              Proudly serving the Washington DC metro area and surrounding communities.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {siteConfig.serviceAreas.map((area) => (
@@ -86,9 +83,9 @@ const About = () => {
       <section id="testimonials" className="py-20 bg-muted/30">
         <div className="container px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-serif font-bold mb-4">What Our Clients Say</h2>
+            <h2 className="text-4xl font-serif font-bold mb-4">What our clients say</h2>
             <p className="text-xl text-muted-foreground">
-              Trusted by homeowners throughout the Portland area
+              Trusted by homeowners throughout the Northern Virginia area
             </p>
           </div>
 
@@ -114,12 +111,12 @@ const About = () => {
       {/* CTA */}
       <section className="py-20">
         <div className="container px-4 text-center">
-          <h2 className="text-4xl font-serif font-bold mb-6">Ready to Work Together?</h2>
+          <h2 className="text-4xl font-serif font-bold mb-6">Ready to work together</h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Let's create something beautiful for your outdoor space
           </p>
           <Button asChild size="lg" className="bg-primary hover:bg-primary-hover">
-            <Link to="/contact">Get Started Today</Link>
+            <Link to="/contact">Get started today</Link>
           </Button>
         </div>
       </section>
