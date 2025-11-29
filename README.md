@@ -8,7 +8,7 @@ A modern, mobile-responsive website for Kent's Garden LLC - a boutique landscapi
 - **Fully Responsive**: Optimized for mobile, tablet, and desktop viewing
 - **Easy Content Management**: All content stored in structured JSON for easy updates
 - **SEO Optimized**: Semantic HTML, meta tags, and proper heading structure
-- **Multiple Pages**: Home, Services, Portfolio, About, Blog, Gallery, Careers, Contact
+- **Multiple Pages**: Home, Services, About, Blog, Gallery, Licensing, Contact
 - **Professional Navigation**: Sticky header with dropdown menus and mobile-friendly design
 
 ## Getting Started
@@ -63,7 +63,6 @@ The file is organized into sections:
 - **Company Information**: Name, tagline, contact details
 - **Home Page**: Hero section, features, testimonials
 - **Services**: Full list of services with descriptions
-- **Portfolio**: Project categories
 - **About**: Company story, mission, values
 - **Service Areas**: Cities and regions served
 
@@ -148,7 +147,6 @@ src/
 ├── pages/           # Page components
 │   ├── Home.tsx
 │   ├── Services.tsx
-│   ├── Portfolio.tsx
 │   ├── About.tsx
 │   ├── Blog.tsx
 │   ├── Gallery.tsx

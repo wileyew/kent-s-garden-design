@@ -23,18 +23,40 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Create email subject and body
+    const subject = encodeURIComponent(
+      `Quote Request${formData.service ? ` - ${siteConfig.services.find(s => s.id === formData.service)?.title || formData.service}` : ''}`
+    );
+    
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone || 'Not provided'}\n` +
+      `Service: ${formData.service ? (siteConfig.services.find(s => s.id === formData.service)?.title || formData.service) : 'Not specified'}\n` +
+      `Request On-Site Consultation: ${formData.consultation ? 'Yes' : 'No'}\n\n` +
+      `Message:\n${formData.message}`
+    );
+    
+    // Open email client with pre-filled information
+    window.location.href = `mailto:lancecadle4@gmail.com?subject=${subject}&body=${body}`;
+    
     toast({
-      title: "Message Sent!",
-      description: "We'll get back to you within 24 hours.",
+      title: "Opening Email Client",
+      description: "Your email client will open with your quote request. Please send the email to complete your request.",
     });
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-      consultation: false,
-    });
+    
+    // Reset form after a short delay
+    setTimeout(() => {
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+        consultation: false,
+      });
+    }, 1000);
   };
 
   return (

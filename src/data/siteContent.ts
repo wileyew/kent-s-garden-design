@@ -210,15 +210,6 @@ export const siteConfig = {
     },
   ],
 
-  // PORTFOLIO CATEGORIES
-  portfolioCategories: [
-    "All Projects",
-    "City Gardens",
-    "Suburban Backyards",
-    "Rooftop & Small Spaces",
-    "Before & After",
-  ],
-
   // SERVICE AREAS
   serviceAreas: [
     "Manassas",

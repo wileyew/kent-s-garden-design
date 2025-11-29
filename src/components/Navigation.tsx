@@ -80,42 +80,6 @@ const Navigation = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              {/* Portfolio Menu */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="bg-transparent">
-                  Portfolio
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <Link
-                          to="/portfolio"
-                          className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
-                        >
-                          <div className="text-sm font-medium leading-none">All Projects</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            Browse our complete portfolio
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                    {siteConfig.portfolioCategories.slice(1).map((category) => (
-                      <li key={category}>
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to={`/portfolio?category=${category.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium leading-none">{category}</div>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-
               {/* About Menu */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent">
@@ -201,13 +165,6 @@ const Navigation = () => {
             <MobileMenuSection title="Services" items={[
               { label: "All Services", to: "/services" },
               ...siteConfig.services.map(s => ({ label: s.title, to: `/services/${s.id}` }))
-            ]} />
-            <MobileMenuSection title="Portfolio" items={[
-              { label: "All Projects", to: "/portfolio" },
-              ...siteConfig.portfolioCategories.slice(1).map(c => ({ 
-                label: c, 
-                to: `/portfolio?category=${c.toLowerCase().replace(/\s+/g, '-')}` 
-              }))
             ]} />
             <MobileMenuSection title="About" items={[
               { label: "Our Story", to: "/about" },

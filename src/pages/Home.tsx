@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Palette, Calendar, Leaf, Heart, Star, ArrowRight } from "lucide-react";
+import { Palette, Calendar, Leaf, Heart, Star, ArrowRight, Quote } from "lucide-react";
 import { siteConfig } from "@/data/siteContent";
+import { galleryImages } from "@/data/galleryImages";
 import heroImage from "@/assets/hero-garden.jpg";
 import suburbanImage from "@/assets/portfolio-suburban.jpg";
 import rooftopImage from "@/assets/portfolio-rooftop.jpg";
@@ -45,6 +46,27 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Request a Quote - Prominent Section */}
+      <section className="py-16 bg-primary text-primary-foreground sticky top-20 z-40 shadow-lg">
+        <div className="container px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Quote className="h-8 w-8" />
+              <h2 className="text-3xl md:text-4xl font-serif font-bold">Request a Free Quote</h2>
+            </div>
+            <p className="text-lg md:text-xl mb-6 opacity-90">
+              Get started on your landscaping or hardscaping project today. We'll provide you with a competitive quote.
+            </p>
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6 h-auto shadow-xl">
+              <Link to="/contact">
+                Get Your Free Quote
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* What We Do */}
       <section className="py-20 bg-muted/30">
         <div className="container px-4">
@@ -81,8 +103,8 @@ const Home = () => {
             <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Featured Products</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <Link to="/portfolio" className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow">
               <img
                 src={suburbanImage}
                 alt="Modern landscaping and hardscaping visions"
@@ -94,9 +116,9 @@ const Home = () => {
                   <p className="opacity-90">Contemporary design meets natural beauty</p>
                 </div>
               </div>
-            </Link>
+            </div>
 
-            <Link to="/portfolio" className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow">
+            <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow">
               <img
                 src={rooftopImage}
                 alt="Commercial maintenance"
@@ -108,13 +130,79 @@ const Home = () => {
                   <p className="opacity-90">Efficiently maintaining commercial properties to the utmost degree.</p>
                 </div>
               </div>
-            </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery - All Remaining Images */}
+      <section className="py-20 bg-muted/30">
+        <div className="container px-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {galleryImages
+              .filter(img => 
+                !img.alt.toLowerCase().includes('patio') && 
+                !img.alt.toLowerCase().includes('mulch') &&
+                !img.alt.toLowerCase().includes('paver')
+              )
+              .map((image) => (
+                <div
+                  key={image.id}
+                  className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 aspect-square"
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                    <p className="text-white text-xs font-medium line-clamp-2">{image.alt}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Showcase - Patio & Mulch */}
+      <section className="py-20 bg-muted/30">
+        <div className="container px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Work</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              See examples of our professional patio installations and landscaping services
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            {galleryImages
+              .filter(img => 
+                img.alt.toLowerCase().includes('patio') || 
+                img.alt.toLowerCase().includes('mulch') ||
+                img.alt.toLowerCase().includes('paver')
+              )
+              .slice(0, 3)
+              .map((image) => (
+                <div
+                  key={image.id}
+                  className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-[300px] object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p className="text-white text-sm font-medium">{image.alt}</p>
+                  </div>
+                </div>
+              ))}
           </div>
 
           <div className="text-center">
-            <Button asChild variant="outline" size="lg" className="border-2">
-              <Link to="/portfolio">
-                View Full Portfolio
+            <Button asChild size="lg" className="bg-primary hover:bg-primary-hover text-lg px-8 py-6 h-auto">
+              <Link to="/services">
+                See our services
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -181,18 +269,28 @@ const Home = () => {
       {/* CTA Section */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Ready to work together
-          </h2>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Quote className="h-10 w-10" />
+            <h2 className="text-4xl md:text-5xl font-serif font-bold">
+              Request Your Free Quote Today
+            </h2>
+          </div>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Let's discuss your vision and create a custom plan for your outdoor space.
+            Ready to transform your outdoor space? Get a competitive quote for your landscaping or hardscaping project.
           </p>
-          <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6 h-auto">
-            <Link to="/contact">
-              Get started today
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6 h-auto shadow-xl">
+              <Link to="/contact">
+                Request Free Quote
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8 py-6 h-auto">
+              <a href={`tel:${siteConfig.company.phone}`}>
+                Call {siteConfig.company.phone}
+              </a>
+            </Button>
+          </div>
         </div>
       </section>
     </div>
