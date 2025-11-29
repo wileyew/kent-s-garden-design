@@ -6,12 +6,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Loader2 } from "lucide-react";
 import { siteConfig } from "@/data/siteContent";
 import { useToast } from "@/hooks/use-toast";
+import { sendEmail, sendEmailFallback } from "@/lib/emailService";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,42 +23,58 @@ const Contact = () => {
     consultation: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Create email subject and body
-    const subject = encodeURIComponent(
-      `Quote Request${formData.service ? ` - ${siteConfig.services.find(s => s.id === formData.service)?.title || formData.service}` : ''}`
-    );
-    
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone || 'Not provided'}\n` +
-      `Service: ${formData.service ? (siteConfig.services.find(s => s.id === formData.service)?.title || formData.service) : 'Not specified'}\n` +
-      `Request On-Site Consultation: ${formData.consultation ? 'Yes' : 'No'}\n\n` +
-      `Message:\n${formData.message}`
-    );
-    
-    // Open email client with pre-filled information
-    window.location.href = `mailto:lancecadle4@gmail.com?subject=${subject}&body=${body}`;
-    
-    toast({
-      title: "Opening Email Client",
-      description: "Your email client will open with your quote request. Please send the email to complete your request.",
-    });
-    
-    // Reset form after a short delay
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        service: "",
-        message: "",
-        consultation: false,
+    try {
+      // Get service name if service is selected
+      const serviceName = formData.service 
+        ? siteConfig.services.find(s => s.id === formData.service)?.title 
+        : undefined;
+      
+      // Try to send email via EmailJS
+      const emailSent = await sendEmail(formData, serviceName);
+      
+      if (emailSent) {
+        toast({
+          title: "Message Sent Successfully!",
+          description: "We'll get back to you within 24 hours. Thank you for contacting us!",
+        });
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+          consultation: false,
+        });
+      } else {
+        // Fallback to mailto if EmailJS is not configured
+        sendEmailFallback(formData, serviceName);
+        toast({
+          title: "EmailJS Not Configured",
+          description: "Please configure EmailJS environment variables in AWS Amplify. Your email client will open as a fallback.",
+          variant: "default",
+        });
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      // Fallback to mailto
+      const serviceName = formData.service 
+        ? siteConfig.services.find(s => s.id === formData.service)?.title 
+        : undefined;
+      sendEmailFallback(formData, serviceName);
+      toast({
+        title: "Using Email Client",
+        description: "Unable to send email automatically. Your email client will open. Please send the email manually.",
+        variant: "default",
       });
-    }, 1000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -164,8 +182,20 @@ const Contact = () => {
                       </label>
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary-hover">
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      className="w-full bg-primary hover:bg-primary-hover"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        "Send Message"
+                      )}
                     </Button>
                   </form>
                 </CardContent>
