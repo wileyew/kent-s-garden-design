@@ -81,3 +81,4 @@ Then restart your dev server.
 3. Verify your EmailJS account is active
 4. Check browser console for detailed error messages
 
+

@@ -40,3 +40,4 @@ else
     echo "You can convert the SVG manually at: https://convertio.co/svg-ico/"
 fi
 
+

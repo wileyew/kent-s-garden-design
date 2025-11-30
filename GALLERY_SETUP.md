@@ -79,3 +79,4 @@ The gallery includes:
 - **Alt Text**: Write descriptive alt text for accessibility and SEO
 - **Categories**: Be consistent with category names for better filtering
 
+

@@ -81,3 +81,4 @@ for (let i = 0; i < lines.length; i++) {
 fs.writeFileSync(configFile, improvedLines.join('\n'), 'utf8');
 console.log(`✅ Improved descriptions for ${entryCount} images`);
 
+

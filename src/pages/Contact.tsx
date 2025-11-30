@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,12 +9,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Phone, Mail, MapPin, Clock, Loader2 } from "lucide-react";
 import { siteConfig } from "@/data/siteContent";
-import { useToast } from "@/hooks/use-toast";
-import { sendEmail, sendEmailFallback } from "@/lib/emailService";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [state, handleSubmit] = useForm("xkgdgvez");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,60 +20,6 @@ const Contact = () => {
     message: "",
     consultation: false,
   });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      // Get service name if service is selected
-      const serviceName = formData.service 
-        ? siteConfig.services.find(s => s.id === formData.service)?.title 
-        : undefined;
-      
-      // Try to send email via EmailJS
-      const emailSent = await sendEmail(formData, serviceName);
-      
-      if (emailSent) {
-        toast({
-          title: "Message Sent Successfully!",
-          description: "We'll get back to you within 24 hours. Thank you for contacting us!",
-        });
-        
-        // Reset form
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          service: "",
-          message: "",
-          consultation: false,
-        });
-      } else {
-        // Fallback to mailto if EmailJS is not configured
-        sendEmailFallback(formData, serviceName);
-        toast({
-          title: "EmailJS Not Configured",
-          description: "Please configure EmailJS environment variables in AWS Amplify. Your email client will open as a fallback.",
-          variant: "default",
-        });
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-      // Fallback to mailto
-      const serviceName = formData.service 
-        ? siteConfig.services.find(s => s.id === formData.service)?.title 
-        : undefined;
-      sendEmailFallback(formData, serviceName);
-      toast({
-        title: "Using Email Client",
-        description: "Unable to send email automatically. Your email client will open. Please send the email manually.",
-        variant: "default",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <div className="min-h-screen">
@@ -98,106 +42,153 @@ const Contact = () => {
               <Card className="border-2">
                 <CardContent className="pt-6">
                   <h2 className="text-3xl font-serif font-bold mb-6">Get a Quote</h2>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                          id="name"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="John Smith"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="john@example.com"
-                        />
-                      </div>
+                  {state.succeeded ? (
+                    <div className="text-center py-8">
+                      <p className="text-xl font-semibold text-green-600 mb-2">Thanks for your message!</p>
+                      <p className="text-muted-foreground">We'll get back to you within 24 hours.</p>
                     </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="name">Full Name *</Label>
+                          <Input
+                            id="name"
+                            name="name"
+                            type="text"
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            placeholder="John Smith"
+                          />
+                          <ValidationError 
+                            prefix="Name" 
+                            field="name"
+                            errors={state.errors}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Email *</Label>
+                          <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            placeholder="john@example.com"
+                          />
+                          <ValidationError 
+                            prefix="Email" 
+                            field="email"
+                            errors={state.errors}
+                          />
+                        </div>
+                      </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="phone">Phone</Label>
+                          <Input
+                            id="phone"
+                            name="phone"
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            placeholder="(555) 123-4567"
+                          />
+                          <ValidationError 
+                            prefix="Phone" 
+                            field="phone"
+                            errors={state.errors}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="service">Service Type</Label>
+                          <Select
+                            value={formData.service}
+                            onValueChange={(value) => setFormData({ ...formData, service: value })}
+                          >
+                            <SelectTrigger id="service">
+                              <SelectValue placeholder="Select a service" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {siteConfig.services.map((service) => (
+                                <SelectItem key={service.id} value={service.id}>
+                                  {service.title}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <input
+                            type="hidden"
+                            name="service"
+                            value={formData.service}
+                          />
+                          <ValidationError 
+                            prefix="Service" 
+                            field="service"
+                            errors={state.errors}
+                          />
+                        </div>
+                      </div>
+
                       <div className="space-y-2">
-                        <Label htmlFor="phone">Phone</Label>
-                        <Input
-                          id="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="(555) 123-4567"
+                        <Label htmlFor="message">Message *</Label>
+                        <Textarea
+                          id="message"
+                          name="message"
+                          required
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                          placeholder="Tell us about your project..."
+                          rows={6}
+                        />
+                        <ValidationError 
+                          prefix="Message" 
+                          field="message"
+                          errors={state.errors}
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="service">Service Type</Label>
-                        <Select
-                          value={formData.service}
-                          onValueChange={(value) => setFormData({ ...formData, service: value })}
+
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="consultation"
+                          checked={formData.consultation}
+                          onCheckedChange={(checked) =>
+                            setFormData({ ...formData, consultation: checked as boolean })
+                          }
+                        />
+                        <input
+                          type="hidden"
+                          name="consultation"
+                          value={formData.consultation ? "yes" : "no"}
+                        />
+                        <label
+                          htmlFor="consultation"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                          <SelectTrigger id="service">
-                            <SelectValue placeholder="Select a service" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {siteConfig.services.map((service) => (
-                              <SelectItem key={service.id} value={service.id}>
-                                {service.title}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                          I would like to request an on-site consultation
+                        </label>
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        id="message"
-                        required
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Tell us about your project..."
-                        rows={6}
-                      />
-                    </div>
-
-                    <div className="flex items-center space-x-2">
-                      <Checkbox
-                        id="consultation"
-                        checked={formData.consultation}
-                        onCheckedChange={(checked) =>
-                          setFormData({ ...formData, consultation: checked as boolean })
-                        }
-                      />
-                      <label
-                        htmlFor="consultation"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="w-full bg-primary hover:bg-primary-hover"
+                        disabled={state.submitting}
                       >
-                        I would like to request an on-site consultation
-                      </label>
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      size="lg" 
-                      className="w-full bg-primary hover:bg-primary-hover"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Sending...
-                        </>
-                      ) : (
-                        "Send Message"
-                      )}
-                    </Button>
-                  </form>
+                        {state.submitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          "Send Message"
+                        )}
+                      </Button>
+                    </form>
+                  )}
                 </CardContent>
               </Card>
             </div>
