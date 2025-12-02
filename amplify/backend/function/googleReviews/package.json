@@ -1,0 +1,8 @@
+{
+  "name": "google-reviews-function",
+  "version": "1.0.0",
+  "description": "AWS Lambda function to fetch Google Reviews using Places API",
+  "main": "index.js",
+  "dependencies": {}
+}
+

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, ArrowRight } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import suburbanImage from "@/assets/portfolio-suburban.jpg";
 
 // Sample blog posts
@@ -14,9 +13,14 @@ const blogPosts = [
     category: "Seasonal Care",
     image: suburbanImage,
   },
-];
-
-const hardscapingContent = `Message from Lance, the owner of Kent's Garden:
+  {
+    id: 2,
+    title: "Hardscaping Ideas and Thoughts",
+    excerpt: "Message from Lance, the owner of Kent's Garden: Kent's Garden specializes in any and all hardscaping projects. The state of Virginia requires certain codes/zoning needs to be met. As the owner, I have studied the Virginia construction and landscaping code vigorously. Over the span of 12 years that I've provided landscaping work for various companies… I have learned the codes and zoning ordinances like the back of my hand. My team and I have installed beautiful patios, retaining walls, veneer, stacked stone, natural stone, walkways, brick/mortar, you name it, we have done it.",
+    date: "December 2, 2024",
+    category: "Hardscaping",
+    image: suburbanImage,
+    fullContent: `Message from Lance, the owner of Kent's Garden:
 
 Kent's Garden specializes in any and all hardscaping projects. The state of Virginia requires certain codes/zoning needs to be met. As the owner, I have studied the Virginia construction and landscaping code vigorously. Over the span of 12 years that I've provided landscaping work for various companies… I have learned the codes and zoning ordinances like the back of my hand.
 
@@ -36,7 +40,9 @@ I have many, many clients who love the flagstone look. Flagstone requires a diff
 
 While there are many different varieties of veneer, it's fairly simple to install. My team and I have installed both indoor and outdoor veneer, for many different purposes. There is actually a newer product out called Versetta stone that I encourage all of my clients to look into as well. All of the above are aesthetically pleasing and it's our pleasure installing them!
 
-Feel free to reach out for a consult and we can schedule a time and place to discuss whatever you may need.`;
+Feel free to reach out for a consult and we can schedule a time and place to discuss whatever you may need.`,
+  },
+];
 
 const Blog = () => {
   return (
@@ -51,68 +57,44 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Blog Posts with Tabs */}
+      {/* Blog Posts */}
       <section className="py-16">
         <div className="container px-4">
-          <Tabs defaultValue="all" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8">
-              <TabsTrigger value="all">All Posts</TabsTrigger>
-              <TabsTrigger value="hardscaping">Hardscaping Ideas and Thoughts</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="all" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {blogPosts.map((post) => (
-                  <Card key={post.id} className="group hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer">
-                    <div className="relative h-56 overflow-hidden">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium">
-                          {post.category}
-                        </span>
-                      </div>
-                    </div>
-                    <CardContent className="pt-6">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                        <Calendar className="h-4 w-4" />
-                        <span>{post.date}</span>
-                      </div>
-                      <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h3>
-                      <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-                      <Link
-                        to={`/blog/${post.id}`}
-                        className="inline-flex items-center text-primary font-medium hover:gap-2 transition-all"
-                      >
-                        Read More
-                        <ArrowRight className="ml-1 h-4 w-4" />
-                      </Link>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="hardscaping" className="mt-8">
-              <Card className="max-w-4xl mx-auto">
-                <CardContent className="pt-6">
-                  <h2 className="text-3xl font-serif font-bold mb-6">Hardscaping Ideas and Thoughts</h2>
-                  <div className="prose prose-lg max-w-none">
-                    {hardscapingContent.split('\n\n').map((paragraph, index) => (
-                      <p key={index} className="mb-4 text-lg leading-relaxed text-muted-foreground">
-                        {paragraph}
-                      </p>
-                    ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map((post) => (
+              <Card key={post.id} className="group hover:shadow-lg transition-shadow duration-300 overflow-hidden cursor-pointer">
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-medium">
+                      {post.category}
+                    </span>
                   </div>
+                </div>
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                    <Calendar className="h-4 w-4" />
+                    <span>{post.date}</span>
+                  </div>
+                  <h3 className="text-xl font-serif font-bold mb-3 group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground mb-4 line-clamp-4">{post.excerpt}</p>
+                  <Link
+                    to={`/blog/${post.id}`}
+                    className="inline-flex items-center text-primary font-medium hover:gap-2 transition-all"
+                  >
+                    Read More
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
                 </CardContent>
               </Card>
-            </TabsContent>
-          </Tabs>
+            ))}
+          </div>
         </div>
       </section>
     </div>
