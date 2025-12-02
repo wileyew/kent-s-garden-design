@@ -1,12 +1,21 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Palette, Calendar, Leaf, Heart, Star, ArrowRight, Quote } from "lucide-react";
+import { Palette, Calendar, Leaf, Heart, Star, ArrowRight, Quote, MessageCircle, X } from "lucide-react";
 import { siteConfig } from "@/data/siteContent";
 import { galleryImages } from "@/data/galleryImages";
 import heroImage from "@/assets/hero-garden.jpg";
 import suburbanImage from "@/assets/portfolio-suburban.jpg";
 import rooftopImage from "@/assets/portfolio-rooftop.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 const iconMap = {
   Palette,
@@ -16,6 +25,19 @@ const iconMap = {
 };
 
 const Home = () => {
+  const [showQuoteButton, setShowQuoteButton] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show button after scrolling 300px
+      setShowQuoteButton(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -46,26 +68,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Request a Quote - Prominent Section */}
-      <section className="py-16 bg-primary text-primary-foreground sticky top-20 z-40 shadow-lg">
-        <div className="container px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Quote className="h-8 w-8" />
-              <h2 className="text-3xl md:text-4xl font-serif font-bold">Request a Free Quote</h2>
-            </div>
-            <p className="text-lg md:text-xl mb-6 opacity-90">
-              Get started on your landscaping or hardscaping project today. We'll provide you with a competitive quote.
-            </p>
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6 h-auto shadow-xl">
-              <Link to="/contact">
-                Get Your Free Quote
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
 
       {/* What We Do */}
       <section className="py-20 bg-muted/30">
@@ -135,31 +137,69 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Gallery - All Remaining Images */}
+      {/* Sliding Gallery Carousel */}
       <section className="py-20 bg-muted/30">
         <div className="container px-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {galleryImages
-              .filter(img => 
-                !img.alt.toLowerCase().includes('patio') && 
-                !img.alt.toLowerCase().includes('mulch') &&
-                !img.alt.toLowerCase().includes('paver')
-              )
-              .map((image) => (
-                <div
-                  key={image.id}
-                  className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 aspect-square"
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-                    <p className="text-white text-xs font-medium line-clamp-2">{image.alt}</p>
-                  </div>
-                </div>
-              ))}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Gallery</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Browse through our completed projects and beautiful garden designs
+            </p>
+          </div>
+
+          <div className="max-w-7xl mx-auto">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {galleryImages
+                  .filter(img => 
+                    !img.alt.toLowerCase().includes('patio') && 
+                    !img.alt.toLowerCase().includes('mulch') &&
+                    !img.alt.toLowerCase().includes('paver')
+                  )
+                  .map((image) => (
+                    <CarouselItem key={image.id} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                      <div className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 bg-muted">
+                        <div className="relative w-full aspect-square">
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            className={cn(
+                              "w-full h-full object-cover transition-transform duration-700",
+                              "group-hover:scale-110"
+                            )}
+                            loading="lazy"
+                          />
+                          
+                          {/* Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          
+                          {/* Hover Content */}
+                          <div className="absolute bottom-0 left-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p className="text-white text-sm font-medium drop-shadow-lg line-clamp-2">{image.alt}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2 md:left-4 hidden md:flex" />
+              <CarouselNext className="right-2 md:right-4 hidden md:flex" />
+            </Carousel>
+            
+            <div className="text-center mt-8">
+              <Button asChild variant="outline" size="lg">
+                <Link to="/gallery">
+                  View Full Gallery
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -293,6 +333,56 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Floating Quote Button - Chatbot Style */}
+      {showQuoteButton && (
+        <div className="fixed bottom-6 right-6 z-50">
+          {isExpanded ? (
+            <div className="bg-primary text-primary-foreground rounded-2xl shadow-2xl p-4 max-w-xs animate-in slide-in-from-bottom-5">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <MessageCircle className="h-5 w-5" />
+                  <span className="font-semibold text-sm">Get a Free Quote</span>
+                </div>
+                <button
+                  onClick={() => setIsExpanded(false)}
+                  className="hover:bg-primary-foreground/20 rounded-full p-1 transition-colors"
+                  aria-label="Close"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+              <p className="text-sm mb-4 opacity-90">
+                Ready to transform your outdoor space? Get a competitive quote today.
+              </p>
+              <div className="flex flex-col gap-2">
+                <Button asChild size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground w-full">
+                  <Link to="/contact" onClick={() => setIsExpanded(false)}>
+                    Request Free Quote
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button asChild size="sm" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 w-full">
+                  <a href={`tel:${siteConfig.company.phone}`} onClick={() => setIsExpanded(false)}>
+                    Call {siteConfig.company.phone}
+                  </a>
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={() => setIsExpanded(true)}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-4 shadow-2xl hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+              aria-label="Request a quote"
+            >
+              <MessageCircle className="h-6 w-6" />
+              <span className="absolute -top-1 -right-1 bg-accent text-accent-foreground text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
+                !
+              </span>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,7 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { galleryImages, galleryCategories } from "@/data/galleryImages";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<typeof galleryImages[0] | null>(null);
@@ -23,7 +30,7 @@ const Gallery = () => {
   };
 
   // Lightbox navigation
-  const navigateImage = (direction: "prev" | "next") => {
+  const navigateImage = useCallback((direction: "prev" | "next") => {
     if (!selectedImage) return;
     const currentIndex = filteredImages.findIndex((img) => img.id === selectedImage.id);
     let newIndex: number;
@@ -35,7 +42,7 @@ const Gallery = () => {
     }
 
     setSelectedImage(filteredImages[newIndex]);
-  };
+  }, [selectedImage, filteredImages]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -49,7 +56,7 @@ const Gallery = () => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage]);
+  }, [selectedImage, filteredImages, navigateImage]);
 
   // If no images, show placeholder
   if (galleryImages.length === 0) {
@@ -110,57 +117,71 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Gallery Grid - Masonry Style */}
+      {/* Sliding Gallery Carousel */}
       <section className="py-16">
         <div className="container px-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {filteredImages.map((image, index) => (
-              <div
-                key={image.id}
-                className={cn(
-                  "relative group cursor-pointer overflow-hidden rounded-xl",
-                  "shadow-md hover:shadow-2xl transition-all duration-500",
-                  "bg-muted animate-in fade-in",
-                  loadedImages.has(image.id) ? "opacity-100" : "opacity-0"
-                )}
-                style={{
-                  animationDelay: `${index * 50}ms`,
-                  aspectRatio: "auto",
-                }}
-                onClick={() => setSelectedImage(image)}
-              >
-                <div className="relative w-full h-full min-h-[300px]">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className={cn(
-                      "w-full h-full object-cover transition-transform duration-700",
-                      "group-hover:scale-110"
-                    )}
-                    onLoad={() => handleImageLoad(image.id)}
-                    loading="lazy"
-                  />
-                  
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Hover Content */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="text-center text-white">
-                      <ZoomIn className="h-12 w-12 mx-auto mb-2 drop-shadow-lg" />
-                      <p className="text-sm font-medium drop-shadow-lg">Click to view</p>
+          <div className="max-w-6xl mx-auto">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {filteredImages.map((image, index) => (
+                  <CarouselItem key={image.id} className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                    <div
+                      className={cn(
+                        "relative group cursor-pointer overflow-hidden rounded-xl",
+                        "shadow-md hover:shadow-2xl transition-all duration-500",
+                        "bg-muted",
+                        loadedImages.has(image.id) ? "opacity-100" : "opacity-0"
+                      )}
+                      onClick={() => setSelectedImage(image)}
+                    >
+                      <div className="relative w-full aspect-[4/3]">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className={cn(
+                            "w-full h-full object-cover transition-transform duration-700",
+                            "group-hover:scale-110"
+                          )}
+                          onLoad={() => handleImageLoad(image.id)}
+                          loading="lazy"
+                        />
+                        
+                        {/* Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        
+                        {/* Hover Content */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="text-center text-white">
+                            <ZoomIn className="h-12 w-12 mx-auto mb-2 drop-shadow-lg" />
+                            <p className="text-sm font-medium drop-shadow-lg">Click to view</p>
+                          </div>
+                        </div>
+                        
+                        {/* Category Badge */}
+                        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <span className="inline-block bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium shadow-lg">
+                            {image.category}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Category Badge */}
-                  <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span className="inline-block bg-accent text-accent-foreground px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-                      {image.category}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-2 md:left-4" />
+              <CarouselNext className="right-2 md:right-4" />
+            </Carousel>
+            
+            {/* Image Counter */}
+            <div className="text-center mt-6 text-sm text-muted-foreground">
+              Showing {filteredImages.length} {filteredImages.length === 1 ? "image" : "images"} • Use arrows to navigate
+            </div>
           </div>
         </div>
       </section>
@@ -206,16 +227,17 @@ const Gallery = () => {
             </>
           )}
 
-          {/* Image Container */}
+          {/* Image Container with Sliding Animation */}
           <div 
             className="max-w-7xl w-full max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative flex-1 flex items-center justify-center">
+            <div className="relative flex-1 flex items-center justify-center overflow-hidden">
               <img
+                key={selectedImage.id}
                 src={selectedImage.src}
                 alt={selectedImage.alt}
-                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl animate-in fade-in slide-in-from-right-5 duration-300"
               />
             </div>
             

@@ -25,11 +25,11 @@ const Navigation = () => {
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 md:h-20 items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2 md:space-x-3" onClick={closeMobileMenu}>
+        <Link to="/" className="flex items-center space-x-3 md:space-x-4" onClick={closeMobileMenu}>
           <img 
             src={logo} 
             alt={`${siteConfig.company.name} Logo`}
-            className="h-7 w-auto md:h-9 flex-shrink-0 object-contain"
+            className="h-14 w-auto md:h-20 flex-shrink-0 object-contain"
           />
           <div className="flex flex-col">
             <span className="text-lg md:text-2xl font-serif font-bold text-primary leading-tight">
@@ -141,6 +141,11 @@ const Navigation = () => {
                   Licensing
                 </Link>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link to="/reviews" className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                  Reviews
+                </Link>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
 
@@ -194,6 +199,7 @@ const Navigation = () => {
               <Link to="/blog" onClick={closeMobileMenu} className="block py-2 px-2 text-base font-medium hover:bg-accent rounded-md">Blog</Link>
               <Link to="/gallery" onClick={closeMobileMenu} className="block py-2 px-2 text-base font-medium hover:bg-accent rounded-md">Gallery</Link>
               <Link to="/licensing" onClick={closeMobileMenu} className="block py-2 px-2 text-base font-medium hover:bg-accent rounded-md">Licensing</Link>
+              <Link to="/reviews" onClick={closeMobileMenu} className="block py-2 px-2 text-base font-medium hover:bg-accent rounded-md">Reviews</Link>
               <Button asChild className="w-full bg-primary hover:bg-primary-hover mt-2" onClick={closeMobileMenu}>
                 <Link to="/contact">Get a Quote</Link>
               </Button>
