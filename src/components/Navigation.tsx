@@ -29,10 +29,10 @@ const Navigation = () => {
           <img 
             src={logo} 
             alt={`${siteConfig.company.name} Logo`}
-            className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 object-contain"
+            className="h-7 w-auto md:h-9 flex-shrink-0 object-contain"
           />
           <div className="flex flex-col">
-            <span className="text-lg md:text-2xl font-serif font-bold text-primary">
+            <span className="text-lg md:text-2xl font-serif font-bold text-primary leading-tight">
               {siteConfig.company.name}
             </span>
             <span className="text-xs text-muted-foreground hidden sm:block">
