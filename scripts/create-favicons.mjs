@@ -36,3 +36,4 @@ console.log('✅ Logo SVG copied to public folder');
 console.log('⚠️  PNG favicons need to be generated (see FAVICON_README.txt)');
 
 
+

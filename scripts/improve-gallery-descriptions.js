@@ -82,3 +82,4 @@ fs.writeFileSync(configFile, improvedLines.join('\n'), 'utf8');
 console.log(`✅ Improved descriptions for ${entryCount} images`);
 
 
+

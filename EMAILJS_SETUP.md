@@ -117,3 +117,4 @@ If EmailJS is not configured, the form will fall back to opening the user's emai
 The Public Key is safe to expose in client-side code. EmailJS uses it to identify your account but doesn't grant full access. Your Service ID and Template ID are also safe to expose.
 
 
+

@@ -34,3 +34,4 @@ done
 echo "Done! Note: Some files may need manual conversion if sips is not available."
 
 
+

@@ -40,3 +40,4 @@ rename_heic
 echo "Done! Please review the renamed files."
 
 
+

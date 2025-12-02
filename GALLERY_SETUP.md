@@ -80,3 +80,4 @@ The gallery includes:
 - **Categories**: Be consistent with category names for better filtering
 
 
+

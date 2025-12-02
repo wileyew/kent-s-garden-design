@@ -12,23 +12,27 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { siteConfig } from "@/data/siteContent";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-20 items-center justify-between px-4">
+      <div className="container flex h-16 md:h-20 items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-3">
+        <Link to="/" className="flex items-center space-x-2 md:space-x-3" onClick={closeMobileMenu}>
           <img 
             src={logo} 
             alt={`${siteConfig.company.name} Logo`}
-            className="h-12 w-12 flex-shrink-0"
+            className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 object-contain"
           />
           <div className="flex flex-col">
-            <span className="text-2xl font-serif font-bold text-primary">
+            <span className="text-lg md:text-2xl font-serif font-bold text-primary">
               {siteConfig.company.name}
             </span>
             <span className="text-xs text-muted-foreground hidden sm:block">
@@ -160,49 +164,67 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t bg-background">
-          <div className="container py-4 space-y-4">
-            <MobileMenuSection title="Services" items={[
-              { label: "All Services", to: "/services" },
-              ...siteConfig.services.map(s => ({ label: s.title, to: `/services/${s.id}` }))
-            ]} />
-            <MobileMenuSection title="About" items={[
-              { label: "Our Story", to: "/about" },
-              { label: "Service Areas", to: "/about#service-areas" },
-              { label: "Testimonials", to: "/about#testimonials" },
-            ]} />
-            <Link to="/blog" className="block py-2 text-base font-medium">Blog</Link>
-            <Link to="/gallery" className="block py-2 text-base font-medium">Gallery</Link>
-            <Link to="/licensing" className="block py-2 text-base font-medium">Licensing</Link>
-            <Button asChild className="w-full bg-primary hover:bg-primary-hover">
-              <Link to="/contact">Get a Quote</Link>
-            </Button>
+        <>
+          {/* Overlay to close menu when clicking outside */}
+          <div 
+            className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+            onClick={closeMobileMenu}
+          />
+          <div className="lg:hidden border-t bg-background fixed top-16 left-0 right-0 z-50 max-h-[calc(100vh-4rem)] overflow-y-auto shadow-lg">
+            <div className="container py-3 space-y-2">
+              <div className="flex items-center justify-between mb-2 px-2">
+                <span className="text-sm font-semibold text-muted-foreground">Menu</span>
+                <button
+                  onClick={closeMobileMenu}
+                  className="p-1 hover:bg-accent rounded-md transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <MobileMenuSection title="Services" items={[
+                { label: "All Services", to: "/services" },
+                ...siteConfig.services.map(s => ({ label: s.title, to: `/services/${s.id}` }))
+              ]} onItemClick={closeMobileMenu} />
+              <MobileMenuSection title="About" items={[
+                { label: "Our Story", to: "/about" },
+                { label: "Service Areas", to: "/about#service-areas" },
+                { label: "Testimonials", to: "/about#testimonials" },
+              ]} onItemClick={closeMobileMenu} />
+              <Link to="/blog" onClick={closeMobileMenu} className="block py-2 px-2 text-base font-medium hover:bg-accent rounded-md">Blog</Link>
+              <Link to="/gallery" onClick={closeMobileMenu} className="block py-2 px-2 text-base font-medium hover:bg-accent rounded-md">Gallery</Link>
+              <Link to="/licensing" onClick={closeMobileMenu} className="block py-2 px-2 text-base font-medium hover:bg-accent rounded-md">Licensing</Link>
+              <Button asChild className="w-full bg-primary hover:bg-primary-hover mt-2" onClick={closeMobileMenu}>
+                <Link to="/contact">Get a Quote</Link>
+              </Button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </nav>
   );
 };
 
-const MobileMenuSection = ({ title, items }: { title: string; items: { label: string; to: string }[] }) => {
+const MobileMenuSection = ({ title, items, onItemClick }: { title: string; items: { label: string; to: string }[]; onItemClick?: () => void }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b pb-4">
+    <div className="border-b border-border/40 pb-2">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-2 text-base font-medium"
+        className="flex items-center justify-between w-full py-2 px-2 text-base font-medium hover:bg-accent rounded-md transition-colors"
       >
         {title}
         <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")} />
       </button>
       {isOpen && (
-        <div className="pl-4 pt-2 space-y-2">
+        <div className="pl-4 pt-1 space-y-1">
           {items.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="block py-1 text-sm text-muted-foreground hover:text-foreground"
+              onClick={onItemClick}
+              className="block py-1.5 px-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
             >
               {item.label}
             </Link>
