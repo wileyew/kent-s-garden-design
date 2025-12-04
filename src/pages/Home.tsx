@@ -325,7 +325,7 @@ const Home = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8 py-6 h-auto">
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6 h-auto shadow-xl">
               <a href={`tel:${siteConfig.company.phone}`}>
                 Call {siteConfig.company.phone}
               </a>
