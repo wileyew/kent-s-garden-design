@@ -242,7 +242,7 @@ const Contact = () => {
                 <CardContent className="pt-6">
                   <h3 className="text-xl font-semibold mb-3">Service Areas</h3>
                   <p className="text-muted-foreground mb-3">
-                    We proudly serve the Portland metro area including:
+                    We proudly serve the Northern Virginia area including:
                   </p>
                   <div className="text-sm text-muted-foreground">
                     {siteConfig.serviceAreas.join(", ")}

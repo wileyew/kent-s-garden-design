@@ -1,6 +1,6 @@
 # Kent's Garden LLC Website
 
-A modern, mobile-responsive website for Kent's Garden LLC - a boutique landscaping company serving the Portland metro area.
+A modern, mobile-responsive website for Kent's Garden LLC - a boutique landscaping company serving the Northern Virginia area.
 
 ## Features
 

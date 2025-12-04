@@ -66,19 +66,19 @@ export const siteConfig = {
       {
         text: "Kent's Garden transformed our backyard into an absolute paradise. The attention to detail is incredible!",
         author: "Sarah Johnson",
-        location: "Pearl District, Portland",
+        location: "Northern Virginia area",
         rating: 5,
       },
       {
         text: "Professional, reliable, and truly passionate about gardens. Our outdoor space has never looked better.",
         author: "Michael Chen",
-        location: "Lake Oswego",
+        location: "Northern Virginia area",
         rating: 5,
       },
       {
         text: "From design to installation to ongoing care, Kent's Garden exceeded all our expectations.",
         author: "Emily Rodriguez",
-        location: "Beaverton",
+        location: "Northern Virginia area",
         rating: 5,
       },
     ],

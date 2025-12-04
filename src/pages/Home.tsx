@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Palette, Calendar, Leaf, Heart, ArrowRight, Quote, MessageCircle, X } from "lucide-react";
+import { Palette, Calendar, Leaf, Heart, Star, ArrowRight, Quote, MessageCircle, X } from "lucide-react";
 import { siteConfig } from "@/data/siteContent";
 import { galleryImages } from "@/data/galleryImages";
 import heroImage from "@/assets/hero-garden.jpg";
@@ -277,6 +277,35 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Testimonials */}
+      <section className="py-20">
+        <div className="container px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">What our clients say</h2>
+            <p className="text-xl text-muted-foreground">
+              Trusted by homeowners throughout the Northern Virginia area
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {siteConfig.home.testimonials.map((testimonial, index) => (
+              <Card key={index} className="border-2">
+                <CardContent className="pt-6">
+                  <div className="flex gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-accent text-accent" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-4 italic">"{testimonial.text}"</p>
+                  <div className="font-semibold">{testimonial.author}</div>
+                  <div className="text-sm text-muted-foreground">{testimonial.location}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container px-4 text-center">
@@ -296,7 +325,7 @@ const Home = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-lg px-8 py-6 h-auto shadow-xl">
+            <Button asChild size="lg" variant="outline" className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-8 py-6 h-auto">
               <a href={`tel:${siteConfig.company.phone}`}>
                 Call {siteConfig.company.phone}
               </a>
@@ -333,7 +362,7 @@ const Home = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild size="sm" className="bg-accent hover:bg-accent/90 text-accent-foreground w-full">
+                <Button asChild size="sm" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 w-full">
                   <a href={`tel:${siteConfig.company.phone}`} onClick={() => setIsExpanded(false)}>
                     Call {siteConfig.company.phone}
                   </a>

@@ -79,11 +79,11 @@ const Footer = () => {
           {/* Service Areas */}
           <div>
             <h4 className="font-semibold mb-4">Service Areas</h4>
-            <ul className="space-y-1 text-sm opacity-90">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm opacity-90">
               {siteConfig.serviceAreas.map((area) => (
-                <li key={area}>{area}</li>
+                <div key={area}>{area}</div>
               ))}
-            </ul>
+            </div>
             <div className="mt-6 flex gap-4">
               <a
                 href={siteConfig.social.facebook}

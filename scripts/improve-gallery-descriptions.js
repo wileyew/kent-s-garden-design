@@ -83,3 +83,4 @@ console.log(`✅ Improved descriptions for ${entryCount} images`);
 
 
 
+

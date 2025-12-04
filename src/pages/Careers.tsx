@@ -9,7 +9,7 @@ const jobOpenings = [
     id: 1,
     title: "Landscape Designer",
     type: "Full-time",
-    location: "Portland, OR",
+    location: "Northern Virginia area",
     description: "We're seeking a creative landscape designer with experience in residential garden design and a passion for sustainable practices.",
     requirements: [
       "3+ years experience in landscape design",
@@ -22,7 +22,7 @@ const jobOpenings = [
     id: 2,
     title: "Garden Maintenance Specialist",
     type: "Full-time / Part-time",
-    location: "Portland, OR",
+    location: "Northern Virginia area",
     description: "Join our maintenance team to help keep our clients' gardens beautiful year-round.",
     requirements: [
       "1+ years garden maintenance experience",
@@ -35,7 +35,7 @@ const jobOpenings = [
     id: 3,
     title: "Installation Crew Lead",
     type: "Full-time",
-    location: "Portland, OR",
+    location: "Northern Virginia area",
     description: "Lead our installation team in bringing landscape designs to life.",
     requirements: [
       "5+ years landscape installation experience",

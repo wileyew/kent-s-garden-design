@@ -15,7 +15,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Expose environment variables to the client
-  // Variables prefixed with VITE_ are available in the browser
-  envPrefix: 'VITE_',
 }));
